@@ -29,7 +29,7 @@ const modelSchema = new mongoose.Schema({
     publishedDate: {
         type: Date,
         default: Date.now,
-        get: function (date) { 
+        get: function (date) {
             return new Date(date).toLocaleDateString('en-US');
         }
     },

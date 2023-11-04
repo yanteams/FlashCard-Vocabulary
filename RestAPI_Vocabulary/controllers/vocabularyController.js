@@ -21,17 +21,20 @@ const vocabularyController = {
     },
     getVocabulary: async (req, res) => {
         try {
-            const vocabularies = await Vocabulary.findById(req.params.id)
-            res.status(200).json(vocabularies);
+            const vocabulary = await Vocabulary.findOne({ vocabulary: req.params.vocabulary });
+            res.status(200).json(vocabulary);
 
         } catch (err) {
             res.status(500).json(err);
         }
     },
-    updateVocabulary: async (req, res) => {
+   updateVocabulary: async (req, res) => {
         try {
-            const vocabularies = await Vocabulary.findById(req.params.id);
-            await vocabularies.updateOne({ $set: req.body });
+            const vocabulary = await Vocabulary.findOne({ vocabulary: req.params.vocabulary });
+            if (!vocabulary) {
+                return res.status(404).json('Vocabulary not found');
+            }
+            await vocabulary.updateOne({ $set: req.body });
             res.status(200).json('Updated successfully!');
 
         } catch (err) {
@@ -40,7 +43,10 @@ const vocabularyController = {
     },
     deleteVocabulary: async (req, res) => {
         try {
-            const vocabularies = await Vocabulary.findByIdAndDelete(req.params.id);
+            const vocabulary = await Vocabulary.findOneAndDelete({ vocabulary: req.params.vocabulary });
+            if (!vocabulary) {
+                return res.status(404).json('Vocabulary not found');
+            }
             res.status(200).json('Deleted successfully!');
 
         } catch (err) {
@@ -49,4 +55,26 @@ const vocabularyController = {
     },
 
 };
-module.exports = vocabularyController;
+
+const getVocabularyByVocabulary = async (req, res) => {
+    try {
+        const vocabulary = await Vocabulary.findOne({ vocabulary: req.params.vocabulary });
+
+        if (!vocabulary) {
+            return res.status(404).json({ message: "Từ vựng không tồn tại" });
+        }
+
+        res.json(vocabulary);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = {
+    addVocabulary: vocabularyController.addVocabulary,
+    getAllVocabulary: vocabularyController.getAllVocabulary,
+    getVocabulary: vocabularyController.getVocabulary,
+    updateVocabulary: vocabularyController.updateVocabulary,
+    deleteVocabulary: vocabularyController.deleteVocabulary,
+    getVocabularyByVocabulary: getVocabularyByVocabulary
+};
