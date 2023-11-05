@@ -55,7 +55,11 @@ body {
   font-family: sans-serif;
   font-size: 17px;
 }
-
+#questionCount {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 textarea {
   color: #eaeddaff;
   margin: 0;
@@ -159,4 +163,68 @@ ul {
 #addButton {
   height: 30px;
   cursor: pointer;
+}
+.answer-alert {
+  position: relative;
+  padding: 12px 18px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.answer-alert::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid #f44336;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.answer-alert::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid #f44336;
+  margin-left: 1px;
+}
+
+.answer-alert.fade-in {
+  animation: fade-in 0.5s ease-out both;
+}
+
+.answer-alert.fade-out {
+  animation: fade-out 0.5s ease-out both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
