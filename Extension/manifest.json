@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Vocabulary Flashcards",
+  "description": "An extension for learning vocabulary through flashcards and spaced repetition.",
+  "version": "1.0",
+
+  "icons": {
+    "16": "assets/imgs/16.png",
+    "48": "assets/imgs/48.png",
+    "128": "assets/imgs/128.png"
+  },
+
+  "permissions": ["storage"],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/imgs/16.png",
+      "48": "assets/imgs/48.png",
+      "128": "assets/imgs/128.png"
+    },
+    "default_popup": "popup.html"
+  }
+}
